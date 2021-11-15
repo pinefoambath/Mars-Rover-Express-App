@@ -24,12 +24,14 @@ const App = (state) => {
     return `
         <header></header>
         <main>
-            ${Greeting(store.user.name)}
-            <section>
-                <h3>Put things on the page!</h3>
-                <p>Here is an example section.</p>
-                ${ImageOfTheDay(apod)}
-            </section>
+            <div class="container">
+                ${Greeting(store.user.name)}
+                <section>
+                    <h3>Put things on the page!</h3>
+                    <p>Here is an example section.</p>
+                    ${ImageOfTheDay(apod)}
+                </section>
+            </div>
         </main>
         <footer></footer>
     `

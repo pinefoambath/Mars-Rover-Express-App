@@ -12,13 +12,32 @@ header {
 }
 
 .container {
-  font-size: 24px;
+  font-size: 36px;
+  font-family: 'Saira', sans-serif;
+  margin: auto;
+  width: 70%;
 }
 
 main {
   flex: 1;
   padding: 20px;
 }
+
+.rover_group {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.rover_tag {
+  margin-bottom: 16px;
+  font-size: 62px;
+  border-bottom: solid;
+  background: -webkit-linear-gradient(#91E6A4, blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
 
 footer {
   /* footer styles */

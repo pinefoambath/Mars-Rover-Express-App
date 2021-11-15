@@ -27,8 +27,9 @@ const App = (state) => {
             <div class="container">
                 ${Greeting(store.user.name)}
                 <section>
-                    <h3>Put things on the page!</h3>
-                    <p>Here is an example section.</p>
+                    <h3>Let's learn something about Mars Rovers 👾  🛰</h3>
+                    <p>There are three Rovers currently on Mars (that we know of 👀).</p>
+                    <p>Pick one that you'd like to know more about.</p>
                     ${ImageOfTheDay(apod)}
                 </section>
             </div>

@@ -12,7 +12,10 @@ header {
 }
 
 .container {
-  font-size: 24px;
+  font-size: 36px;
+  font-family: 'Saira', sans-serif;
+  margin: auto;
+  width: 70%;
 }
 
 main {

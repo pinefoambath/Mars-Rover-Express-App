@@ -28,8 +28,19 @@ const App = (state) => {
                 ${Greeting(store.user.name)}
                 <section>
                     <h3>Let's learn something about Mars Rovers 👾  🛰</h3>
-                    <p>There are three Rovers currently on Mars (that we know of 👀).</p>
-                    <p>Pick one that you'd like to know more about.</p>
+                    <p>There are three Rovers currently on Mars (that we know of 👀): ${store.rovers.join(', ')}.</p>
+                    <p>You can learn more about each one of them here:</p>
+                    <div class="rover_group">
+                        <div class="rover_tag">
+                        Curiosity
+                        </div>
+                        <div class="rover_tag">
+                        Opportunity
+                        </div>
+                        <div class="rover_tag">
+                        Spirit
+                        </div>
+                    </div>
                     ${ImageOfTheDay(apod)}
                 </section>
             </div>

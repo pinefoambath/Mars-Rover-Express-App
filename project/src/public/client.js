@@ -90,19 +90,20 @@ const ImageOfTheDay = (apod) => {
             <p>${apod.explanation}</p>
         `)
     } else {
-        return (`
+        return `
             <img src="${apod.image.url}" height="350px" width="100%" />
             <p>${apod.image.explanation}</p>
-        `)
+        `
     }
 }
 
-//render the data from the API call 
+//render the data from the Curiosity Manifest API call 
 const CuriosityManifestData = () => {
     return (` 
         <div>
             ${JSON.stringify(getCuriosityManifestData())}
-        </div> `) }
+        </div> `) 
+}
     
 
 // ------------------------------------------------------  API CALLS

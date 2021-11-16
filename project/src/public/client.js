@@ -41,7 +41,7 @@ const App = (state) => {
                         Spirit
                         </div>
                     </div>
-                    ${JSON.stringify(CuriosityManifestData())}
+                    ${CuriosityManifestData()}
                     ${ImageOfTheDay(apod)}
                 </section>
             </div>

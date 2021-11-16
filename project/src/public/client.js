@@ -27,9 +27,9 @@ const App = (state) => {
             <div class="container">
                 ${Greeting(store.user.name)}
                 <section>
-                    <h3>Let's learn something about Mars Rovers 👾  🛰</h3>
+                    <h3>Let's learn something about Mars Rovers (while I learn about Node.JS and Express.JS) 👾  🛰</h3>
                     <p>There are three Rovers currently on Mars (that we know of 👀): ${store.rovers.join(', ')}.</p>
-                    <p>You can learn more about each one of them here:</p>
+                    <p>You can fetch recent, real-world data from each one of them here:</p>
                     <div class="rover_group">
                         <div class="rover_tag">
                         Curiosity
@@ -41,6 +41,7 @@ const App = (state) => {
                         Spirit
                         </div>
                     </div>
+                    ${JSON.stringify(CuriosityManifestData())}
                     ${ImageOfTheDay(apod)}
                 </section>
             </div>
@@ -96,6 +97,14 @@ const ImageOfTheDay = (apod) => {
     }
 }
 
+//render the data from the API call 
+const CuriosityManifestData = () => {
+    return (` 
+        <div>
+            ${JSON.stringify(getCuriosityManifestData())}
+        </div> `) }
+    
+
 // ------------------------------------------------------  API CALLS
 
 // Example API call
@@ -108,3 +117,12 @@ const getImageOfTheDay = (state) => {
 
     return data
 }
+
+// //curiosity manifest data
+const getCuriosityManifestData = () => {
+    fetch(`http://localhost:3000/curiosity_manifest_data`)
+        .then(res => res.json())
+
+    return data
+}
+

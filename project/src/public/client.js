@@ -119,8 +119,10 @@ const getImageOfTheDay = (state) => {
 
 // //curiosity manifest data
 const getCuriosityManifestData = () => {
-    fetch(`http://localhost:3000/curiosity_manifest_data`)
-        .then(res => res.json())
+    const manifestData = fetch(`http://localhost:3000/curiosity_manifest_data`)
+        .then(res => res.json());
+    console.log(manifestData);    
+    return manifestData
 
 }
 

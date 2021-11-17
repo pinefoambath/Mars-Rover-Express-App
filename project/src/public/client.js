@@ -115,8 +115,6 @@ const getImageOfTheDay = (state) => {
     fetch(`http://localhost:3000/apod`)
         .then(res => res.json())
         .then(apod => updateStore(store, { apod }))
-
-    return data
 }
 
 // //curiosity manifest data
@@ -124,6 +122,5 @@ const getCuriosityManifestData = () => {
     fetch(`http://localhost:3000/curiosity_manifest_data`)
         .then(res => res.json())
 
-    return data
 }
 

@@ -99,11 +99,18 @@ const ImageOfTheDay = (apod) => {
 
 //render the data from the Curiosity Manifest API call 
 const CuriosityManifestData = () => {
-    return (` 
-        <div>
-            ${JSON.stringify(getCuriosityManifestData())}
-        </div> `) 
-}
+    console.log(store.curiosity_manifest_data);
+    if (!store.curiosity_manifest_data) {
+      getCuriosityManifestData();
+      return "";
+    } else {
+      return ` 
+      <div>
+          ${store.curiosity_manifest_data.photo_manifest.launch_date}
+      </div> `;
+    }
+  };
+  
     
 
 // ------------------------------------------------------  API CALLS
@@ -120,9 +127,11 @@ const getImageOfTheDay = (state) => {
 // //curiosity manifest data
 const getCuriosityManifestData = () => {
     const manifestData = fetch(`http://localhost:3000/curiosity_manifest_data`)
-        .then(res => res.json());
-    console.log(manifestData);    
-    return manifestData
-
-}
-
+      .then((res) => res.json())
+      .then((res) =>
+        updateStore(store, {
+          curiosity_manifest_data: res.curiosity_manifest_data,
+        })
+      )
+      .then(() => console.log(store));
+  };

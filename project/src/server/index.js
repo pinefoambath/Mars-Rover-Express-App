@@ -24,4 +24,15 @@ app.get('/apod', async (req, res) => {
     }
 })
 
+app.get('/curiosity_manifest_data', async (req, res) => {
+    try {
+        let curiosity_manifest_data = await fetch(`https://api.nasa.gov/mars-photos/api/v1/manifests/Curiosity/?api_key=${process.env.API_KEY}`)
+            .then(res => res.json())    
+        res.send({ curiosity_manifest_data })
+    } catch (err) {
+        console.log('error:', err);
+    }
+})
+
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

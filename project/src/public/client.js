@@ -27,9 +27,9 @@ const App = (state) => {
             <div class="container">
                 ${Greeting(store.user.name)}
                 <section>
-                    <h3>Let's learn something about Mars Rovers 👾  🛰</h3>
+                    <h3>Let's learn something about Mars Rovers (while I learn about Node.JS and Express.JS) 👾  🛰</h3>
                     <p>There are three Rovers currently on Mars (that we know of 👀): ${store.rovers.join(', ')}.</p>
-                    <p>You can learn more about each one of them here:</p>
+                    <p>You can fetch recent, real-world data from each one of them here:</p>
                     <div class="rover_group">
                         <div class="rover_tag">
                         Curiosity
@@ -41,6 +41,7 @@ const App = (state) => {
                         Spirit
                         </div>
                     </div>
+                    ${CuriosityManifestData()}
                     ${ImageOfTheDay(apod)}
                 </section>
             </div>
@@ -89,12 +90,28 @@ const ImageOfTheDay = (apod) => {
             <p>${apod.explanation}</p>
         `)
     } else {
-        return (`
+        return `
             <img src="${apod.image.url}" height="350px" width="100%" />
             <p>${apod.image.explanation}</p>
-        `)
+        `
     }
 }
+
+//render the data from the Curiosity Manifest API call 
+const CuriosityManifestData = () => {
+    console.log(store.curiosity_manifest_data);
+    if (!store.curiosity_manifest_data) {
+      getCuriosityManifestData();
+      return "";
+    } else {
+      return ` 
+      <div>
+          ${store.curiosity_manifest_data.photo_manifest.launch_date}
+      </div> `;
+    }
+  };
+  
+    
 
 // ------------------------------------------------------  API CALLS
 
@@ -105,6 +122,16 @@ const getImageOfTheDay = (state) => {
     fetch(`http://localhost:3000/apod`)
         .then(res => res.json())
         .then(apod => updateStore(store, { apod }))
-
-    return data
 }
+
+// //curiosity manifest data
+const getCuriosityManifestData = () => {
+    const manifestData = fetch(`http://localhost:3000/curiosity_manifest_data`)
+      .then((res) => res.json())
+      .then((res) =>
+        updateStore(store, {
+          curiosity_manifest_data: res.curiosity_manifest_data,
+        })
+      )
+      .then(() => console.log(store));
+  };

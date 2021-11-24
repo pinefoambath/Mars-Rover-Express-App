@@ -106,7 +106,7 @@ const CuriosityManifestData = () => {
     } else {
       return ` 
       <div>
-          ${store.curiosity_manifest_data.photo_manifest.launch_date}
+          ${store.curiosity_manifest_data.latest_photos[0].rover.launch_date}
       </div> `;
     }
   };

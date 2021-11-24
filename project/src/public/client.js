@@ -105,9 +105,28 @@ const CuriosityManifestData = () => {
       return "";
     } else {
       return ` 
+      <div> 
+      Launch date:
+      </div>
       <div>
           ${store.curiosity_manifest_data.latest_photos[0].rover.launch_date}
-      </div> `;
+      </div>
+      <div> 
+      Landing date:
+      </div>
+      <div>
+          ${store.curiosity_manifest_data.latest_photos[0].rover.landing_date}
+      </div> 
+      <div> 
+      Status:
+      </div>
+      <div>
+          ${store.curiosity_manifest_data.latest_photos[0].rover.status}
+      </div>
+      <div>
+      Latest Photo, taken on ${store.curiosity_manifest_data.latest_photos[0].earth_date}:
+      </div>  
+      <img src="${store.curiosity_manifest_data.latest_photos[0].img_src}" height="350px" width="100%" />`;
     }
   };
   

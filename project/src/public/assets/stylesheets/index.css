@@ -30,7 +30,7 @@ main {
 
 .rover_tag {
   margin-bottom: 16px;
-  font-size: 62px;
+  font-size: 42px;
   border-bottom: solid;
   background: -webkit-linear-gradient(#91E6A4, blue);
   -webkit-background-clip: text;

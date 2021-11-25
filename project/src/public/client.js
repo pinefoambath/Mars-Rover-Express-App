@@ -1,7 +1,7 @@
 let store = {
     user: { name: "Visitor" },
     apod: '',
-    rovers: ['Curiosity', 'Opportunity', 'Spirit'],
+    rovers: ['Curiosity', 'Opportunity', 'Spirit', 'Perseverance'],
 }
 
 // add our markup to the page
@@ -28,7 +28,7 @@ const App = (state) => {
                 ${Greeting(store.user.name)}
                 <section>
                     <h3>Let's learn something about Mars Rovers (while I learn about Node.JS and Express.JS) 👾  🛰</h3>
-                    <p>There are three Rovers currently on Mars (that we know of 👀): ${store.rovers.join(', ')}.</p>
+                    <p>There are four Rovers currently on Mars (that we know of 👀): ${store.rovers.join(', ')}.</p>
                     <p>You can fetch recent, real-world data from each one of them here:</p>
                     <div class="rover_group">
                         <div class="rover_tag">
@@ -39,6 +39,9 @@ const App = (state) => {
                         </div>
                         <div class="rover_tag">
                         Spirit
+                        </div>
+                        <div class="rover_tag">
+                        Perseverance
                         </div>
                     </div>
                     ${CuriosityManifestData()}
@@ -131,7 +134,8 @@ const CuriosityManifestData = () => {
       <div>
         Latest Photo, taken on Earth Date ${store.curiosity_manifest_data.latest_photos[0].earth_date}:
       </div>  
-      <img src="${store.curiosity_manifest_data.latest_photos[0].img_src}" height="350px" width="100%" />`;
+      <img src="${store.curiosity_manifest_data.latest_photos[0].img_src}" height="350px" width="100%" />
+      `;
     }
   };
   

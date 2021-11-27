@@ -29,6 +29,7 @@ main {
 }
 
 .rover_tag {
+  display: inline-block;
   margin-bottom: 16px;
   font-size: 42px;
   border-bottom: solid;

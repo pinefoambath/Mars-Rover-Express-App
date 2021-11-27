@@ -33,16 +33,24 @@ const App = (state) => {
                     <p>You can fetch recent, real-world data from each one of them here:</p>
                     <div class="rover_group">
                         <div class="rover_tag">
-                        Curiosity
+                          <div id="curiosity">
+                            Curiosity
+                          </div>
+                        </div>  
+                        <div id="opportunity">
+                          <div class="rover_tag">
+                            Opportunity
+                          </div>
                         </div>
-                        <div class="rover_tag">
-                        Opportunity
-                        </div>
-                        <div class="rover_tag">
-                        Spirit
-                        </div>
-                        <div class="rover_tag">
-                        Perseverance
+                        <div id="spirit">
+                          <div class="rover_tag">
+                            Spirit
+                          </div>
+                        </div>  
+                        <div id="perseverance"> 
+                          <div class="rover_tag">
+                            Perseverance
+                          </div>
                         </div>
                     </div>
                     ${ManifestData()}
@@ -58,6 +66,7 @@ const App = (state) => {
 window.addEventListener('load', () => {
     render(root, store)
 })
+
 
 // ------------------------------------------------------  COMPONENTS
 
@@ -79,9 +88,6 @@ const ImageOfTheDay = (apod) => {
     // If image does not already exist, or it is not from today -- request it again
     const today = new Date()
     const photodate = new Date(apod.date)
-    console.log(photodate.getDate(), today.getDate());
-
-    console.log(photodate.getDate() === today.getDate());
     if (!apod || apod.date === today.getDate() ) {
         getImageOfTheDay(store)
     }
@@ -103,7 +109,6 @@ const ImageOfTheDay = (apod) => {
 
 //render the data from the Curiosity Manifest API call 
 const ManifestData = () => {
-    console.log(store.manifest_data);
     if (!store.manifest_data) {
       getManifestData();
       return "";
@@ -164,3 +169,16 @@ const getManifestData = () => {
       )
       .then(() => console.log(store));
   };
+
+  // listening for the selection of Curiosity
+  window.onload=function(){
+    document.getElementById('curiosity').addEventListener("click", function() {
+      updateStore(store, {
+        selectedRover: 'curiosity',
+      });
+      console.log("I just selected curiosity");
+      console.log(store);
+    });
+    
+  }
+

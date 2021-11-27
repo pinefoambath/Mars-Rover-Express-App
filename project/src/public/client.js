@@ -2,6 +2,7 @@ let store = {
     user: { name: "Visitor" },
     apod: '',
     rovers: ['Curiosity', 'Opportunity', 'Spirit', 'Perseverance'],
+    selectedRover: '',
 }
 
 // add our markup to the page
@@ -44,7 +45,7 @@ const App = (state) => {
                         Perseverance
                         </div>
                     </div>
-                    ${CuriosityManifestData()}
+                    ${ManifestData()}
                     ${ImageOfTheDay(apod)}
                 </section>
             </div>
@@ -101,40 +102,40 @@ const ImageOfTheDay = (apod) => {
 }
 
 //render the data from the Curiosity Manifest API call 
-const CuriosityManifestData = () => {
-    console.log(store.curiosity_manifest_data);
-    if (!store.curiosity_manifest_data) {
-      getCuriosityManifestData();
+const ManifestData = () => {
+    console.log(store.manifest_data);
+    if (!store.manifest_data) {
+      getManifestData();
       return "";
     } else {
       return ` 
      
       <div>
-        You're viewing information about "${store.curiosity_manifest_data.latest_photos[0].rover.name}":
+        You're viewing information about "${store.manifest_data.latest_photos[0].rover.name}":
       </div>
 
       <div> 
         Launch date:
       </div>
       <div>
-        ${store.curiosity_manifest_data.latest_photos[0].rover.launch_date}
+        ${store.manifest_data.latest_photos[0].rover.launch_date}
       </div>
       <div> 
         Landing date:
       </div>
       <div>
-        ${store.curiosity_manifest_data.latest_photos[0].rover.landing_date}
+        ${store.manifest_data.latest_photos[0].rover.landing_date}
       </div> 
       <div> 
       Status:
       </div>
       <div>
-        ${store.curiosity_manifest_data.latest_photos[0].rover.status}
+        ${store.manifest_data.latest_photos[0].rover.status}
       </div>
       <div>
-        Latest Photo, taken on Earth Date ${store.curiosity_manifest_data.latest_photos[0].earth_date}:
+        Latest Photo, taken on Earth Date ${store.manifest_data.latest_photos[0].earth_date}:
       </div>  
-      <img src="${store.curiosity_manifest_data.latest_photos[0].img_src}" height="350px" width="100%" />
+      <img src="${store.manifest_data.latest_photos[0].img_src}" height="350px" width="100%" />
       `;
     }
   };
@@ -153,12 +154,12 @@ const getImageOfTheDay = (state) => {
 }
 
 // //curiosity manifest data
-const getCuriosityManifestData = () => {
-    const manifestData = fetch(`http://localhost:3000/curiosity_manifest_data`)
+const getManifestData = () => {
+    const manifestData = fetch(`http://localhost:3000/manifest_data`)
       .then((res) => res.json())
       .then((res) =>
         updateStore(store, {
-          curiosity_manifest_data: res.curiosity_manifest_data,
+          manifest_data: res.manifest_data,
         })
       )
       .then(() => console.log(store));

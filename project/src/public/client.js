@@ -32,22 +32,22 @@ const App = (state) => {
                     <p>There are four Rovers currently on Mars (that we know of 👀): ${store.rovers.join(', ')}.</p>
                     <p>You can fetch recent, real-world data from each one of them here:</p>
                     <div class="rover_group">
-                        <div class="rover_tag">
+                        <div class="rover_tag" onclick="SelectRover('Curiosity')">
                           <div id="curiosity">
                             Curiosity
                           </div>
                         </div>  
-                        <div id="opportunity">
+                        <div id="opportunity" onclick="SelectRover('Opportunity')">
                           <div class="rover_tag">
                             Opportunity
                           </div>
                         </div>
-                        <div id="spirit">
+                        <div id="spirit" onclick="SelectRover('Spirit')">
                           <div class="rover_tag">
                             Spirit
                           </div>
                         </div>  
-                        <div id="perseverance"> 
+                        <div id="perseverance" onclick="SelectRover('Perseverance')"> 
                           <div class="rover_tag">
                             Perseverance
                           </div>
@@ -110,13 +110,13 @@ const ImageOfTheDay = (apod) => {
 //render the data from the Curiosity Manifest API call 
 const ManifestData = () => {
     if (!store.manifest_data) {
-      getManifestData();
+      getManifestData(store.selectedRover);
       return "";
     } else {
       return ` 
      
       <div>
-        You're viewing information about "${store.manifest_data.latest_photos[0].rover.name}":
+        You're viewing information about "${store.selectedRover}":
       </div>
 
       <div> 
@@ -158,9 +158,9 @@ const getImageOfTheDay = (state) => {
         .then(apod => updateStore(store, { apod }))
 }
 
-// //curiosity manifest data
-const getManifestData = () => {
-    const manifestData = fetch(`http://localhost:3000/manifest_data`)
+// getting the manifest data from the backend
+const getManifestData = (rover) => {
+    const manifestData = fetch(`http://localhost:3000/manifest_data_${rover}`)
       .then((res) => res.json())
       .then((res) =>
         updateStore(store, {
@@ -170,15 +170,11 @@ const getManifestData = () => {
       .then(() => console.log(store));
   };
 
-  // listening for the selection of Curiosity
-  window.onload=function(){
-    document.getElementById('curiosity').addEventListener("click", function() {
+// listening for the selection of a rover
+const SelectRover = (rover) =>  {
       updateStore(store, {
-        selectedRover: 'curiosity',
+        selectedRover: rover,
       });
-      console.log("I just selected curiosity");
+      console.log("I selected this rover");
       console.log(store);
-    });
-    
-  }
-
+}

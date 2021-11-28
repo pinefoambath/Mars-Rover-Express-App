@@ -24,9 +24,39 @@ app.get('/apod', async (req, res) => {
     }
 })
 
-app.get('/manifest_data', async (req, res) => {
+app.get('/manifest_data_Opportunity', async (req, res) => {
+    try {
+        let manifest_data = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/latest_photos?api_key=${process.env.API_KEY}`)
+            .then(res => res.json())    
+        res.send({ manifest_data })
+    } catch (err) {
+        console.log('error:', err);
+    }
+})
+
+app.get('/manifest_data_Spirit', async (req, res) => {
+    try {
+        let manifest_data = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/latest_photos?api_key=${process.env.API_KEY}`)
+            .then(res => res.json())    
+        res.send({ manifest_data })
+    } catch (err) {
+        console.log('error:', err);
+    }
+})
+
+app.get('/manifest_data_Perseverance', async (req, res) => {
     try {
         let manifest_data = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/latest_photos?api_key=${process.env.API_KEY}`)
+            .then(res => res.json())    
+        res.send({ manifest_data })
+    } catch (err) {
+        console.log('error:', err);
+    }
+})
+
+app.get('/manifest_data_Curiosity', async (req, res) => {
+    try {
+        let manifest_data = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/latest_photos?api_key=${process.env.API_KEY}`)
             .then(res => res.json())    
         res.send({ manifest_data })
     } catch (err) {

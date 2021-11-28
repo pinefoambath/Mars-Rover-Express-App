@@ -2,7 +2,7 @@ let store = {
     user: { name: "Visitor" },
     apod: '',
     rovers: ['Curiosity', 'Opportunity', 'Spirit', 'Perseverance'],
-    selectedRover: '',
+    selectedRover: 'Curiosity',
 }
 
 // add our markup to the page
@@ -109,10 +109,9 @@ const ImageOfTheDay = (apod) => {
 
 //render the data from the Curiosity Manifest API call 
 const ManifestData = () => {
-    if (!store.manifest_data) {
+  
       getManifestData(store.selectedRover);
-      return "";
-    } else {
+
       return ` 
      
       <div>
@@ -142,7 +141,7 @@ const ManifestData = () => {
       </div>  
       <img src="${store.manifest_data.latest_photos[0].img_src}" height="350px" width="100%" />
       `;
-    }
+
   };
   
     

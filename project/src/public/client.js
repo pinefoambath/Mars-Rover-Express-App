@@ -1,7 +1,8 @@
 let store = {
     user: { name: "Visitor" },
     apod: '',
-    rovers: ['Curiosity', 'Opportunity', 'Spirit'],
+    rovers: ['Curiosity', 'Opportunity', 'Spirit', 'Perseverance'],
+    selectedRover: '',
 }
 
 // add our markup to the page
@@ -25,24 +26,34 @@ const App = (state) => {
         <header></header>
         <main>
             <div class="container">
-                ${Greeting(store.user.name)}
+                Greetings!
                 <section>
                     <h3>Let's learn something about Mars Rovers (while I learn about Node.JS and Express.JS) 👾  🛰</h3>
-                    <p>There are three Rovers currently on Mars (that we know of 👀): ${store.rovers.join(', ')}.</p>
-                    <p>You can fetch recent, real-world data from each one of them here:</p>
+                    <p>There are four Rovers currently on Mars (that we know of 👀): ${store.rovers.join(', ')}.</p>
+                    <p>You can fetch recent, real-world data from each one of them by clicking on their names below:</p>
                     <div class="rover_group">
+                      <div id="curiosity" onclick="SelectRover('Curiosity')">
                         <div class="rover_tag">
-                        Curiosity
+                          Curiosity
                         </div>
-                        <div class="rover_tag">
-                        Opportunity
+                      </div>
+                        <div id="opportunity" onclick="SelectRover('Opportunity')">
+                          <div class="rover_tag">
+                            Opportunity
+                          </div>
                         </div>
-                        <div class="rover_tag">
-                        Spirit
+                        <div id="spirit" onclick="SelectRover('Spirit')">
+                          <div class="rover_tag">
+                            Spirit
+                          </div>
+                        </div>  
+                        <div id="perseverance" onclick="SelectRover('Perseverance')"> 
+                          <div class="rover_tag">
+                            Perseverance
+                          </div>
                         </div>
                     </div>
-                    ${CuriosityManifestData()}
-                    ${ImageOfTheDay(apod)}
+                    ${ManifestData()}
                 </section>
             </div>
         </main>
@@ -55,29 +66,15 @@ window.addEventListener('load', () => {
     render(root, store)
 })
 
+
 // ------------------------------------------------------  COMPONENTS
 
-// Pure function that renders conditional information -- THIS IS JUST AN EXAMPLE, you can delete it.
-const Greeting = (name) => {
-    if (name) {
-        return `
-            <h1>Welcome, ${name}!</h1>
-        `
-    }
-
-    return `
-        <h1>Hello!</h1>
-    `
-}
 
 // Example of a pure function that renders infomation requested from the backend
 const ImageOfTheDay = (apod) => {
     // If image does not already exist, or it is not from today -- request it again
     const today = new Date()
     const photodate = new Date(apod.date)
-    console.log(photodate.getDate(), today.getDate());
-
-    console.log(photodate.getDate() === today.getDate());
     if (!apod || apod.date === today.getDate() ) {
         getImageOfTheDay(store)
     }
@@ -98,40 +95,70 @@ const ImageOfTheDay = (apod) => {
 }
 
 //render the data from the Curiosity Manifest API call 
-const CuriosityManifestData = () => {
-    console.log(store.curiosity_manifest_data);
-    if (!store.curiosity_manifest_data) {
-      getCuriosityManifestData();
-      return "";
-    } else {
+const ManifestData = () => {
+  if (!store.manifest_data) {
+    getManifestData(store.selectedRover);
+    return "";
+  } else { }
+
       return ` 
+     
       <div>
-          ${store.curiosity_manifest_data.photo_manifest.launch_date}
-      </div> `;
-    }
+        You're viewing information about "${store.selectedRover}":
+      </div>
+      <div class="rover_info">
+        <div> 
+          Launch date:
+        </div>
+        <div class="data_detail">
+          ${store.manifest_data.photos[0].rover.launch_date}
+        </div>
+      </div>  
+      <div class="rover_info">
+        <div> 
+          Landing date:
+        </div>
+        <div class="data_detail">
+          ${store.manifest_data.photos[0].rover.landing_date}
+        </div> 
+      </div>  
+      <div class="rover_info">
+        <div> 
+        Status:
+        </div>
+        <div class="data_detail">
+          ${store.manifest_data.photos[0].rover.status}
+        </div>
+      </div>  
+      <div>
+        Latest Photos taken on Earth Date ${store.manifest_data.photos[0].earth_date}:
+      </div>  
+      <img class="photo" src="${store.manifest_data.photos[0].img_src}" height="auto" max-width="100%" />
+      <img class="photo" src="${store.manifest_data.photos[1].img_src}" height="auto" max-width="100%" />
+      `;
+
   };
-  
     
 
 // ------------------------------------------------------  API CALLS
 
-// Example API call
-const getImageOfTheDay = (state) => {
-    let { apod } = state
 
-    fetch(`http://localhost:3000/apod`)
-        .then(res => res.json())
-        .then(apod => updateStore(store, { apod }))
-}
-
-// //curiosity manifest data
-const getCuriosityManifestData = () => {
-    const manifestData = fetch(`http://localhost:3000/curiosity_manifest_data`)
+// getting the manifest data from the backend
+const getManifestData = (rover) => {
+    const manifestData = fetch(`http://localhost:3000/manifest_data_${rover}`)
       .then((res) => res.json())
       .then((res) =>
         updateStore(store, {
-          curiosity_manifest_data: res.curiosity_manifest_data,
+          manifest_data: res.manifest_data,
         })
       )
       .then(() => console.log(store));
   };
+
+// listening for the selection of a rover
+const SelectRover = (rover) =>  {
+      updateStore(store, {
+        selectedRover: rover,
+      });
+      getManifestData(store.selectedRover);
+}

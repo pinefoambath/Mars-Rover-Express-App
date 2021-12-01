@@ -24,11 +24,41 @@ app.get('/apod', async (req, res) => {
     }
 })
 
-app.get('/curiosity_manifest_data', async (req, res) => {
+app.get('/manifest_data_Opportunity', async (req, res) => {
     try {
-        let curiosity_manifest_data = await fetch(`https://api.nasa.gov/mars-photos/api/v1/manifests/Curiosity/?api_key=${process.env.API_KEY}`)
+        let manifest_data = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos?earth_date=2018-06-09&api_key=${process.env.API_KEY}`)
             .then(res => res.json())    
-        res.send({ curiosity_manifest_data })
+        res.send({ manifest_data })
+    } catch (err) {
+        console.log('error:', err);
+    }
+})
+
+app.get('/manifest_data_Spirit', async (req, res) => {
+    try {
+        let manifest_data = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?earth_date=2010-02-01&api_key=${process.env.API_KEY}`)
+            .then(res => res.json())    
+        res.send({ manifest_data })
+    } catch (err) {
+        console.log('error:', err);
+    }
+})
+
+app.get('/manifest_data_Perseverance', async (req, res) => {
+    try {
+        let manifest_data = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/photos?earth_date=2021-11-28&api_key=${process.env.API_KEY}`)
+            .then(res => res.json())    
+        res.send({ manifest_data })
+    } catch (err) {
+        console.log('error:', err);
+    }
+})
+
+app.get('/manifest_data_Curiosity', async (req, res) => {
+    try {
+        let manifest_data = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2021-11-30&api_key=${process.env.API_KEY}`)
+            .then(res => res.json())    
+        res.send({ manifest_data })
     } catch (err) {
         console.log('error:', err);
     }

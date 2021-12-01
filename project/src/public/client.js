@@ -111,7 +111,7 @@ const ManifestData = () => {
           Launch date:
         </div>
         <div class="data_detail">
-          ${store.manifest_data.latest_photos[0].rover.launch_date}
+          ${store.manifest_data.photos[0].rover.launch_date}
         </div>
       </div>  
       <div class="rover_info">
@@ -119,7 +119,7 @@ const ManifestData = () => {
           Landing date:
         </div>
         <div class="data_detail">
-          ${store.manifest_data.latest_photos[0].rover.landing_date}
+          ${store.manifest_data.photos[0].rover.landing_date}
         </div> 
       </div>  
       <div class="rover_info">
@@ -127,13 +127,14 @@ const ManifestData = () => {
         Status:
         </div>
         <div class="data_detail">
-          ${store.manifest_data.latest_photos[0].rover.status}
+          ${store.manifest_data.photos[0].rover.status}
         </div>
       </div>  
       <div>
-        Latest Photos taken on Earth Date ${store.manifest_data.latest_photos[0].earth_date}:
+        Latest Photos taken on Earth Date ${store.manifest_data.photos[0].earth_date}:
       </div>  
-      <img class="photo" src="${store.manifest_data.latest_photos[0].img_src}" height="auto" max-width="100%" />
+      <img class="photo" src="${store.manifest_data.photos[0].img_src}" height="auto" max-width="100%" />
+      <img class="photo" src="${store.manifest_data.photos[1].img_src}" height="auto" max-width="100%" />
       `;
 
   };

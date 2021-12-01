@@ -2,7 +2,7 @@ let store = {
     user: { name: "Visitor" },
     apod: '',
     rovers: ['Curiosity', 'Opportunity', 'Spirit', 'Perseverance'],
-    selectedRover: 'Curiosity',
+    selectedRover: '',
 }
 
 // add our markup to the page
@@ -26,17 +26,17 @@ const App = (state) => {
         <header></header>
         <main>
             <div class="container">
-                ${Greeting(store.user.name)}
+                Greetings!
                 <section>
                     <h3>Let's learn something about Mars Rovers (while I learn about Node.JS and Express.JS) 👾  🛰</h3>
                     <p>There are four Rovers currently on Mars (that we know of 👀): ${store.rovers.join(', ')}.</p>
-                    <p>You can fetch recent, real-world data from each one of them here:</p>
+                    <p>You can fetch recent, real-world data from each one of them by clicking on their names below:</p>
                     <div class="rover_group">
-                        <div class="rover_tag" onclick="SelectRover('Curiosity')">
-                          <div id="curiosity">
-                            Curiosity
-                          </div>
-                        </div>  
+                      <div id="curiosity" onclick="SelectRover('Curiosity')">
+                        <div class="rover_tag">
+                          Curiosity
+                        </div>
+                      </div>
                         <div id="opportunity" onclick="SelectRover('Opportunity')">
                           <div class="rover_tag">
                             Opportunity
@@ -54,7 +54,6 @@ const App = (state) => {
                         </div>
                     </div>
                     ${ManifestData()}
-                    ${ImageOfTheDay(apod)}
                 </section>
             </div>
         </main>
@@ -70,18 +69,6 @@ window.addEventListener('load', () => {
 
 // ------------------------------------------------------  COMPONENTS
 
-// Pure function that renders conditional information -- THIS IS JUST AN EXAMPLE, you can delete it.
-const Greeting = (name) => {
-    if (name) {
-        return `
-            <h1>Welcome, ${name}!</h1>
-        `
-    }
-
-    return `
-        <h1>Hello!</h1>
-    `
-}
 
 // Example of a pure function that renders infomation requested from the backend
 const ImageOfTheDay = (apod) => {
@@ -109,53 +96,51 @@ const ImageOfTheDay = (apod) => {
 
 //render the data from the Curiosity Manifest API call 
 const ManifestData = () => {
-  
-      getManifestData(store.selectedRover);
+  if (!store.manifest_data) {
+    getManifestData(store.selectedRover);
+    return "";
+  } else { }
 
       return ` 
      
       <div>
         You're viewing information about "${store.selectedRover}":
       </div>
-
-      <div> 
-        Launch date:
-      </div>
+      <div class="rover_info">
+        <div> 
+          Launch date:
+        </div>
+        <div class="data_detail">
+          ${store.manifest_data.latest_photos[0].rover.launch_date}
+        </div>
+      </div>  
+      <div class="rover_info">
+        <div> 
+          Landing date:
+        </div>
+        <div class="data_detail">
+          ${store.manifest_data.latest_photos[0].rover.landing_date}
+        </div> 
+      </div>  
+      <div class="rover_info">
+        <div> 
+        Status:
+        </div>
+        <div class="data_detail">
+          ${store.manifest_data.latest_photos[0].rover.status}
+        </div>
+      </div>  
       <div>
-        ${store.manifest_data.latest_photos[0].rover.launch_date}
-      </div>
-      <div> 
-        Landing date:
-      </div>
-      <div>
-        ${store.manifest_data.latest_photos[0].rover.landing_date}
-      </div> 
-      <div> 
-      Status:
-      </div>
-      <div>
-        ${store.manifest_data.latest_photos[0].rover.status}
-      </div>
-      <div>
-        Latest Photo, taken on Earth Date ${store.manifest_data.latest_photos[0].earth_date}:
+        Latest Photos taken on Earth Date ${store.manifest_data.latest_photos[0].earth_date}:
       </div>  
       <img src="${store.manifest_data.latest_photos[0].img_src}" height="350px" width="100%" />
       `;
 
   };
-  
     
 
 // ------------------------------------------------------  API CALLS
 
-// Example API call
-const getImageOfTheDay = (state) => {
-    let { apod } = state
-
-    fetch(`http://localhost:3000/apod`)
-        .then(res => res.json())
-        .then(apod => updateStore(store, { apod }))
-}
 
 // getting the manifest data from the backend
 const getManifestData = (rover) => {
@@ -174,6 +159,5 @@ const SelectRover = (rover) =>  {
       updateStore(store, {
         selectedRover: rover,
       });
-      console.log("I selected this rover");
-      console.log(store);
+      getManifestData(store.selectedRover);
 }

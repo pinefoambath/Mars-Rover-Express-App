@@ -133,7 +133,7 @@ const ManifestData = () => {
       <div>
         Latest Photos taken on Earth Date ${store.manifest_data.latest_photos[0].earth_date}:
       </div>  
-      <img src="${store.manifest_data.latest_photos[0].img_src}" height="350px" width="100%" />
+      <img class="photo" src="${store.manifest_data.latest_photos[0].img_src}" height="auto" max-width="100%" />
       `;
 
   };

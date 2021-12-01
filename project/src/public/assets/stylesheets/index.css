@@ -62,7 +62,7 @@ footer {
 @media (min-width: 768px) {
   /* use mobile */
   .container {
-    font-size: 36px;
+    font-size: 28px;
     font-family: 'Saira', sans-serif;
     margin: auto;
     width: 80%;
@@ -78,13 +78,22 @@ footer {
 
 .rover_tag {
   margin-bottom: 16px;
-  font-size: 42px;
+  font-size: 32px;
 }
 
 /* -------------------  DESKTOP  -------------------- */
 
 @media (min-width: 1224px) {
-  /* use mobile */
+  
+  .container {
+    font-size: 36px;
+  }
+  
+  .rover_tag {
+    margin-bottom: 16px;
+    font-size: 42px;
+  }
+  
 }
 
 /* -------------------  LARGE SCREENS  -------------- */

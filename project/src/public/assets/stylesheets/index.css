@@ -12,10 +12,10 @@ header {
 }
 
 .container {
-  font-size: 36px;
+  font-size: 24px;
   font-family: 'Saira', sans-serif;
   margin: auto;
-  width: 70%;
+  width: 80%;
 }
 
 main {
@@ -25,17 +25,25 @@ main {
 
 .rover_group {
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
 }
 
 .rover_tag {
   display: inline-block;
   margin-bottom: 16px;
-  font-size: 42px;
-  border-bottom: solid;
+  font-size: 16px;
   background: -webkit-linear-gradient(#91E6A4, blue);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.data_detail {
+  margin-left: 2px;
+}
+
+.rover_info {
+  display: flex
 }
 
 
@@ -47,6 +55,24 @@ footer {
 /* -------------------  TABLET  --------------------- */
 @media (min-width: 768px) {
   /* use mobile */
+  .container {
+    font-size: 36px;
+    font-family: 'Saira', sans-serif;
+    margin: auto;
+    width: 80%;
+  }
+  
+  .rover_group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+}
+
+.rover_tag {
+  margin-bottom: 16px;
+  font-size: 42px;
 }
 
 /* -------------------  DESKTOP  -------------------- */

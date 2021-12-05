@@ -1,7 +1,7 @@
 let store = {
     user: { name: "Visitor" },
     apod: '',
-    rovers: ['Curiosity', 'Opportunity', 'Spirit', 'Perseverance'],
+    rovers: ['curiosity', 'opportunity', 'spirit', 'perseverance'],
     selectedRover: '',
 }
 
@@ -21,6 +21,13 @@ const render = async (root, state) => {
 // create content
 const App = (state) => {
     let { rovers, apod } = state
+    const sortedRovers = store.rovers.sort(function(a, b){
+      if(a < b) { return -1; }
+      if(a > b) { return 1; }
+      return 0;
+   })
+
+   const capitalizedRovers = sortedRovers.map(function(x) { return x.toUpperCase(); });
 
     return `
         <header></header>
@@ -29,7 +36,7 @@ const App = (state) => {
                 Greetings!
                 <section>
                     <h3>Let's learn something about Mars Rovers (while I learn about Node.JS and Express.JS) 👾  🛰</h3>
-                    <p>There are four Rovers currently on Mars (that we know of 👀): ${store.rovers.join(', ')}.</p>
+                    <p>There are four Rovers currently on Mars (that we know of 👀): ${capitalizedRovers.join(', ')}.</p>
                     <p>You can fetch recent, real-world data from each one of them by clicking on their names below:</p>
                     <div class="rover_group">
                       <div id="curiosity" onclick="SelectRover('Curiosity')">
@@ -119,7 +126,7 @@ const ManifestData = () => {
           Landing date:
         </div>
         <div class="data_detail">
-          ${store.manifest_data.photos[0].rover.landing_date}
+        ${store.manifest_data.photos[0].rover.landing_date}
         </div> 
       </div>  
       <div class="rover_info">

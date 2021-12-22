@@ -13,7 +13,7 @@ header {
 
 .container {
   font-size: 24px;
-  font-family: 'Saira', sans-serif;
+  font-family: "Saira", sans-serif;
   margin: auto;
   width: 80%;
 }
@@ -33,7 +33,7 @@ main {
   display: inline-block;
   margin-bottom: 16px;
   font-size: 16px;
-  background: -webkit-linear-gradient(#91E6A4, blue);
+  background: -webkit-linear-gradient(#91e6a4, blue);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -43,7 +43,7 @@ main {
 }
 
 .rover_info {
-  display: flex
+  display: flex;
 }
 
 .photo {
@@ -51,8 +51,6 @@ main {
   margin: 30px auto;
   object-fit: cover;
 }
-
-
 
 footer {
   /* footer styles */
@@ -63,11 +61,11 @@ footer {
   /* use mobile */
   .container {
     font-size: 28px;
-    font-family: 'Saira', sans-serif;
+    font-family: "Saira", sans-serif;
     margin: auto;
     width: 80%;
   }
-  
+
   .rover_group {
     display: flex;
     flex-direction: row;
@@ -84,16 +82,14 @@ footer {
 /* -------------------  DESKTOP  -------------------- */
 
 @media (min-width: 1224px) {
-  
   .container {
     font-size: 36px;
   }
-  
+
   .rover_tag {
     margin-bottom: 16px;
     font-size: 42px;
   }
-  
 }
 
 /* -------------------  LARGE SCREENS  -------------- */

@@ -1,42 +1,49 @@
 let store = {
-    user: { name: "Visitor" },
-    apod: '',
-    rovers: ['curiosity', 'opportunity', 'spirit', 'perseverance'],
-    selectedRover: '',
-}
+  user: { name: "Visitor" },
+  apod: "",
+  rovers: ["curiosity", "opportunity", "spirit", "perseverance"],
+  selectedRover: "",
+};
 
 // add our markup to the page
-const root = document.getElementById('root')
+const root = document.getElementById("root");
 
 const updateStore = (store, newState) => {
-    store = Object.assign(store, newState)
-    render(root, store)
-}
+  store = Object.assign(store, newState);
+  render(root, store);
+};
 
 const render = async (root, state) => {
-    root.innerHTML = App(state)
-}
-
+  root.innerHTML = App(state);
+};
 
 // create content
 const App = (state) => {
-    let { rovers, apod } = state
-    const sortedRovers = store.rovers.sort(function(a, b){
-      if(a < b) { return -1; }
-      if(a > b) { return 1; }
-      return 0;
-   })
+  let { rovers, apod } = state;
+  const sortedRovers = store.rovers.sort(function (a, b) {
+    if (a < b) {
+      return -1;
+    }
+    if (a > b) {
+      return 1;
+    }
+    return 0;
+  });
 
-   const capitalizedRovers = sortedRovers.map(function(x) { return x.toUpperCase(); });
+  const capitalizedRovers = sortedRovers.map(function (x) {
+    return x.toUpperCase();
+  });
 
-    return `
+  return `
         <header></header>
         <main>
             <div class="container">
                 Greetings!
                 <section>
                     <h3>Let's learn something about Mars Rovers (while I learn about Node.JS and Express.JS) 👾  🛰</h3>
-                    <p>There are four Rovers currently on Mars (that we know of 👀): ${capitalizedRovers.join(', ')}.</p>
+                    <p>There are four Rovers currently on Mars (that we know of 👀): ${capitalizedRovers.join(
+                      ", "
+                    )}.</p>
                     <p>You can fetch recent, real-world data from each one of them by clicking on their names below:</p>
                     <div class="rover_group">
                       <div id="curiosity" onclick="SelectRover('Curiosity')">
@@ -65,50 +72,49 @@ const App = (state) => {
             </div>
         </main>
         <footer></footer>
-    `
-}
+    `;
+};
 
 // listening for load event because page should load before any JS is called
-window.addEventListener('load', () => {
-    render(root, store)
-})
-
+window.addEventListener("load", () => {
+  render(root, store);
+});
 
 // ------------------------------------------------------  COMPONENTS
 
-
 // Example of a pure function that renders infomation requested from the backend
 const ImageOfTheDay = (apod) => {
-    // If image does not already exist, or it is not from today -- request it again
-    const today = new Date()
-    const photodate = new Date(apod.date)
-    if (!apod || apod.date === today.getDate() ) {
-        getImageOfTheDay(store)
-    }
+  // If image does not already exist, or it is not from today -- request it again
+  const today = new Date();
+  const photodate = new Date(apod.date);
+  if (!apod || apod.date === today.getDate()) {
+    getImageOfTheDay(store);
+  }
 
-    // check if the photo of the day is actually type video!
-    if (apod.media_type === "video") {
-        return (`
+  // check if the photo of the day is actually type video!
+  if (apod.media_type === "video") {
+    return `
             <p>See today's featured video <a href="${apod.url}">here</a></p>
             <p>${apod.title}</p>
             <p>${apod.explanation}</p>
-        `)
-    } else {
-        return `
+        `;
+  } else {
+    return `
             <img src="${apod.image.url}" height="350px" width="100%" />
             <p>${apod.image.explanation}</p>
-        `
-    }
-}
+        `;
+  }
+};
 
-//render the data from the Curiosity Manifest API call 
+//render the data from the Curiosity Manifest API call
 const ManifestData = () => {
   if (!store.manifest_data) {
     getManifestData(store.selectedRover);
     return "";
-  } else { }
+  } else {
+  }
 
-      return ` 
+  return ` 
      
       <div>
         You're viewing information about "${store.selectedRover}":
@@ -143,29 +149,26 @@ const ManifestData = () => {
       <img class="photo" src="${store.manifest_data.photos[0].img_src}" height="auto" max-width="100%" />
       <img class="photo" src="${store.manifest_data.photos[1].img_src}" height="auto" max-width="100%" />
       `;
-
-  };
-    
+};
 
 // ------------------------------------------------------  API CALLS
 
-
 // getting the manifest data from the backend
 const getManifestData = (rover) => {
-    const manifestData = fetch(`http://localhost:3000/manifest_data_${rover}`)
-      .then((res) => res.json())
-      .then((res) =>
-        updateStore(store, {
-          manifest_data: res.manifest_data,
-        })
-      )
-      .then(() => console.log(store));
-  };
+  const manifestData = fetch(`http://localhost:3000/manifest_data_${rover}`)
+    .then((res) => res.json())
+    .then((res) =>
+      updateStore(store, {
+        manifest_data: res.manifest_data,
+      })
+    )
+    .then(() => console.log(store));
+};
 
 // listening for the selection of a rover
-const SelectRover = (rover) =>  {
-      updateStore(store, {
-        selectedRover: rover,
-      });
-      getManifestData(store.selectedRover);
-}
+const SelectRover = (rover) => {
+  updateStore(store, {
+    selectedRover: rover,
+  });
+  getManifestData(store.selectedRover);
+};

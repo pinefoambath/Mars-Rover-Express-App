@@ -5,7 +5,7 @@ let store = {
   selectedRover: "",
 };
 
-// add our markup to the page
+// add the markup to the page
 const root = document.getElementById("root");
 
 const updateStore = (store, newState) => {
@@ -106,7 +106,7 @@ const ImageOfTheDay = (apod) => {
   }
 };
 
-//render the data from the Curiosity Manifest API call
+//render the data from the Manifest API call
 const ManifestData = () => {
   if (!store.manifest_data) {
     getManifestData(store.selectedRover);

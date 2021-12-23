@@ -6,10 +6,10 @@ This ExpressJS app shows you the most recent images that were sent back by NASA'
 ## How to run this
 
 - Clone the repo locally
-- Install dependencies by running yarn install
-- You'll need a NASA developer API key. You can get one here To do that, go here: https://api.nasa.gov/.
-- Create a .env file in the root of the project. Store your API key in there (as in API_KEY=YourKey)
-- Run yarn start in your terminal & enjoy interacting with the dashboard on http:localhost:3000
+- Install dependencies by running `yarn install`
+- You'll need a NASA developer API key. You can get one here: https://api.nasa.gov/.
+- Create a `.env` file in the root of the project. Store your API key in there (as in API_KEY=YourKey)
+- Run `yarn start` in your terminal & enjoy interacting with the dashboard on `http:localhost:3000`
 
 ## Why I made this
-I made this app to practice functional programming in JavaScript. It's also my first go at using ExpressJS as a NodeJS web framework. 
+I made this app to practice functional programming in JavaScript, learn about ExpressJS and NodeJS.

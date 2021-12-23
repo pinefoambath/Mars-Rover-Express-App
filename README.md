@@ -1,7 +1,7 @@
-# Mars Rover Express.JS App
+# Mars Rover Express app
 
 ## What this is
-This ExpressJS app shows you the most recent images that were sent back by NASA's Mars rovers. You can select a rover, and then will see the most recent image it had sent back to Earth. The app connects to the NASA API. Happy browsing!
+This Express app shows you the most recent images that were sent back by NASA's Mars rovers. You can select a rover, and then will see the most recent image it had sent back to Earth. The app connects to the NASA API. Happy browsing!
 
 ## How to run this
 
@@ -12,4 +12,4 @@ This ExpressJS app shows you the most recent images that were sent back by NASA'
 - Run `yarn start` in your terminal & enjoy interacting with the dashboard on `http:localhost:3000`
 
 ## Why I made this
-I made this app to practice functional programming in JavaScript, learn about ExpressJS and NodeJS.
+I made this app to practice functional programming in JavaScript, learn about Express and Node.js.

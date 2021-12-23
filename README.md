@@ -3,6 +3,9 @@
 ## What this is
 This Express app shows you the most recent images that were sent back by NASA's Mars rovers. You can select a rover, and then will see the most recent image it had sent back to Earth. The app connects to the NASA API. Happy browsing!
 
+
+![Screenshot of the dashboard](/project/src/public/assets/images/screenshot.png?raw=true "Screenshot")
+
 ## How to run this
 
 - Clone the repo locally
@@ -13,5 +16,3 @@ This Express app shows you the most recent images that were sent back by NASA's 
 
 ## Why I made this
 I made this app to practice functional programming in JavaScript, learn about Express and Node.js.
-
-![Screenshot of the dashboard](/project/src/public/assets/images/screenshot.png?raw=true "Screenshot")

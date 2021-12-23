@@ -13,3 +13,5 @@ This Express app shows you the most recent images that were sent back by NASA's 
 
 ## Why I made this
 I made this app to practice functional programming in JavaScript, learn about Express and Node.js.
+
+![Screenshot of the dashboard](/public/assets/images/screenshot.png?raw=true "Screenshot")

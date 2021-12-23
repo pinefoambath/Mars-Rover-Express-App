@@ -40,7 +40,7 @@ const App = (state) => {
             <div class="container">
                 Greetings!
                 <section>
-                    <h3>Let's learn something about Mars Rovers (while I learn about Node.JS and Express.JS) 👾  🛰</h3>
+                    <h3>Let's learn something about Mars Rovers (while I learn about Node.js and Express) 👾  🛰</h3>
                     <p>There are four Rovers currently on Mars (that we know of 👀): ${capitalizedRovers.join(
                       ", "
                     )}.</p>
